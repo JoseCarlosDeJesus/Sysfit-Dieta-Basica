@@ -14,7 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 //========================================
 const userController = require('./controllers/UserController');
+// adiciona user
 app.post('/user', userController.store);
+// lista user
+app.get('/user', userController.show);
 //=========================
 
 
