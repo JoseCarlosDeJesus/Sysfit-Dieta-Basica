@@ -18,6 +18,9 @@ const userController = require('./controllers/UserController');
 app.post('/user', userController.store);
 // lista user
 app.get('/user', userController.show);
+// lista user, filtrando por email
+// ex: /user/buscaemail/?email=vaguetti@gmail.com
+app.get('/user/buscaemail/*', userController.index);
 //=========================
 
 

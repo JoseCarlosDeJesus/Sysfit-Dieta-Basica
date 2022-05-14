@@ -8,6 +8,14 @@ module.exports = {
         let users = await User.find();
         return res.json(users);
     }, 
+  //lista com filtro "email"
+     async index(req,res)
+    {
+        let users = await User.find(
+          { email : req.query.email}
+                                   );
+        return res.json(users);
+    },
   // adiciona usuario
   async store(req, res)
      {
