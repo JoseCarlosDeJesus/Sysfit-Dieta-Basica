@@ -30,6 +30,7 @@ module.exports = {
     },
 
   // altera usuario
+  // devesse passar dois dados: o id via param e o json via body
    async update(req,res){
         let user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true}); 
         return res.json(user);
