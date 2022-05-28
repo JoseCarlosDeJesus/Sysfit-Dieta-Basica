@@ -22,6 +22,17 @@ module.exports = {
         const user =  await User.create(req.body);
 
         return res.json(user);
-     }
+     },
+  // deleta usuario
+  async destroy(req,res){
+      let user = await User.findByIdAndRemove(req.params.id);
+         return res.json(user);
+    },
+
+  // altera usuario
+   async update(req,res){
+        let user = await User.findByIdAndUpdate(req.params.id,req.body,{new:true}); 
+        return res.json(user);
+    }
  
 };

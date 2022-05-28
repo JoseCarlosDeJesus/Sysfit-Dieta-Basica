@@ -21,6 +21,15 @@ app.get('/user', userController.show);
 // lista user, filtrando por email
 // ex: /user/buscaemail/?email=vaguetti@gmail.com
 app.get('/user/buscaemail/*', userController.index);
+
+// exclui user
+//req.params  = route params (post, put, delete)
+app.delete('/user/:id', userController.destroy);
+
+// altera user
+app.put('/user/:id', userController.update);
+
+
 //=========================
 
 
