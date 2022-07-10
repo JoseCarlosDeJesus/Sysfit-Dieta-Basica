@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 //================================
 const mongoose = require('mongoose');
 var cors = require('cors');
-mongoose.connect('mongodb+srv://vaguetti:dwm20221@cluster0.004qy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://JoseCarlos:1@cluster0.cijws.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
      useNewUrlParser: true,
      useUnifiedTopology: true
 });
@@ -31,11 +31,6 @@ app.put('/user/:id', userController.update);
 
 
 //=========================
-
-
-
-
-
 
 const testController = require('./controllers/TestController');
 
@@ -75,6 +70,61 @@ app.post('/api/echobody', (req,res) => {
   res.send(req.body);
 });
 
+/* categoria */
+
+const CategoryController = require('./controllers/CategoryController');
+const { isValidId } = require('./helpers/id.helper');
+
+ app.get('/category', (_, res) =>
+    res.json(CategoryController.getCategoriesList())
+  );
+
+ app.get('/category/:categoryId', (req, res) => {
+    const { categoryId } = req.params;
+
+    if (!isValidId(categoryId)) {
+      res.status(400).json({
+        message: 'Invalid Category ID',
+      });
+    }
+
+    res.json(CategoryController.getCategoryById(categoryId));
+  });
+/* fim dos endpoints de categoria*/
+
+/*foods*/
+
+const FoodController = require('./controllers/FoodController');
+
+ app.get('/food', (_, res) =>
+    res.json(FoodController.getFoodList())
+  );
+
+app.get('/food/:foodId', (req, res) => {
+    const { foodId } = req.params;
+
+    if (!isValidId(foodId)) {
+      res.status(400).json({
+        message: 'Invalid Food ID',
+      });
+    }
+
+    res.json(FoodController.getFoodById(foodId));
+  });
+
+ app.get('/category/:categoryId/food', (req, res) => {
+    const { categoryId } = req.params;
+
+    if (!isValidId(categoryId)) {
+      res.status(400).json({
+        message: 'Invalid category id',
+      });
+    }
+
+    res.json(FoodController.getFoodByCategoryId(categoryId));
+  });
+
+/* fim dos endpoints de foods*/
 
 app.listen(3000, () => console.log('server started'));
 
