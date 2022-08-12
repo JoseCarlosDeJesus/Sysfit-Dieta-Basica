@@ -126,5 +126,9 @@ app.get('/food/:foodId', (req, res) => {
 
 /* fim dos endpoints de foods*/
 
+app.get('/api/v1/cadastro', (req, res) => {
+    res.send('cadastro')
+});
+
 app.listen(3000, () => console.log('server started'));
 
